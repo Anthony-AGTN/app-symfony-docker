@@ -3,6 +3,8 @@
 {% block title %}Edit Item{% endblock %}
 
 {% block body %}
+    <img src="{{ asset('images/Items.png') }}" alt="Image Items" width="300px" />
+
     <h1>Edit Item</h1>
 
     {{ include('item/_form.html.twig', {'button_label': 'Update'}) }}
