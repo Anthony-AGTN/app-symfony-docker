@@ -7,7 +7,7 @@ services:
       - ./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
     depends_on:
       - db
-    command: bash -c "if [ ! -d vendor ]; then composer install; fi && php-fpm"
+    command: bash -c "if [ ! -f .env.local ] && [ -f .env.example ]; then cp .env.example .env.local; fi && if [ ! -d vendor ]; then composer install --no-progress --prefer-dist; fi && php-fpm"
 
   nginx:
     image: nginx:1.25-alpine

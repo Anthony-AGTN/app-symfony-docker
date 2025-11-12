@@ -55,8 +55,11 @@ Il inclut PHP 8.2, Composer, Symfony CLI, Xdebug, Nginx, MariaDB, Adminer et Mai
 Construire et démarrer les conteneurs :
 
 ```bash
-# Création du fichier .env
-cp app/.env.example app/.env.local
+# Cloner le projet
+git clone git@github.com:Anthony-AGTN/app-symfony-docker.git
+
+# Se rendre dans le dossier du projet
+cd app-symfony-docker
 
 # Construction de l'image Docker
 docker compose build
