@@ -1,0 +1,26 @@
+# Logs
+/log/*.log
+/logs/
+/*.log
+
+# Conteneurs / volumes / données générées
+/data/
+*.db
+*.sql
+*.sqlite
+*.sqlite3
+
+# -----------------------------
+# IDE
+# -----------------------------
+/.idea/
+/.vscode/
+/*.iml
+
+# -----------------------------
+# System files
+# -----------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*~
