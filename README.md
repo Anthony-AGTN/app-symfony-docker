@@ -2,7 +2,7 @@
 
 [![Docker](https://img.shields.io/badge/Docker-24-blue?logo=docker)](https://www.docker.com/)
 [![Symfony](https://img.shields.io/badge/Symfony-7.3-000000?logo=symfony&logoColor=white)](https://symfony.com/)
-[![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)](https://www.php.net/)
+[![PHP](https://img.shields.io/badge/PHP-8.3-777BB4?logo=php&logoColor=white)](https://www.php.net/)
 [![Composer](https://img.shields.io/badge/Composer-2.x-885630?logo=composer&logoColor=white)](https://getcomposer.org/)
 [![Xdebug](https://img.shields.io/badge/Xdebug-3.x-2E8B57?logo=php&logoColor=white)](https://xdebug.org/)
 [![Nginx](https://img.shields.io/badge/Nginx-1.25+-009639?logo=nginx&logoColor=white)](https://nginx.org/en/docs/)
@@ -11,7 +11,7 @@
 [![MailHog](https://img.shields.io/badge/MailHog-latest-D06C6C?logo=mailhog&logoColor=white)](https://github.com/mailhog/MailHog)
 
 Ce projet fournit un environnement de développement complet pour **Symfony**, basé sur **Docker**.  
-Il inclut PHP 8.2, Composer, Symfony CLI, Xdebug, Nginx, MariaDB, Adminer et Mailhog.
+Il inclut PHP 8.3, Composer, Symfony CLI, Xdebug, Nginx, MariaDB, Adminer et Mailhog et PHP CS Fixer.
 
 ---
 
@@ -35,7 +35,7 @@ Il inclut PHP 8.2, Composer, Symfony CLI, Xdebug, Nginx, MariaDB, Adminer et Mai
 
 | Service | Conteneur           | Ports                   | Description                                    |
 |---------|---------------------|-------------------------|------------------------------------------------|
-| PHP     | app-symfony-php     | -                       | PHP 8.2 FPM avec Composer, Symfony CLI, Xdebug |
+| PHP     | app-symfony-php     | -                       | PHP 8.3 FPM avec Composer, Symfony CLI, Xdebug |
 | Nginx   | app-symfony-nginx   | 8080                    | Sert l’application Symfony                     |
 | MariaDB | app-symfony-db      | 3306                    | Base de données                                |
 | Adminer | app-symfony-adminer | 8081                    | Interface web pour gérer la BDD                |
