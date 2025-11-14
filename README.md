@@ -52,7 +52,7 @@ Il inclut PHP 8.2, Composer, Symfony CLI, Xdebug, Nginx, MariaDB, Adminer et Mai
 
 ## 🚀 Démarrage de l’environnement
 
-Construire et démarrer les conteneurs :
+### Construire et démarrer les conteneurs :
 
 ```bash
 # Cloner le projet
@@ -80,7 +80,8 @@ docker compose exec php symfony console asset-map:compile
 # avec des données de test pour la table Item (Fixtures)
 docker compose exec php symfony console doctrine:fixtures:load
 ```
-Arrêter / redémarrer la stack
+
+### Arrêter / redémarrer la stack
 
 ```bash
 docker compose down
@@ -108,9 +109,11 @@ Base de données: app-symfony-db
 
 Accéder à Mailhog: http://localhost:8025
 
+---
+
 ## 🛠 Commandes utiles
 
-Symfony CLI et Composer dans le conteneur PHP
+### Symfony CLI et Composer dans le conteneur PHP
 
 ```bash
 # Ouvrir un terminal dans le conteneur PHP
@@ -137,11 +140,15 @@ Active le débogage à chaque requête.
 
 ## ✉ Mailer Symfony
 
+---
+
 Dans .env ou .env.local :
 
 MAILER_DSN=smtp://mailhog:1025
 
 Mailhog capture tous les mails envoyés en dev, accessibles via l’interface web sur http://localhost:8025.
+
+---
 
 ## 🗂 Volumes
 
@@ -150,6 +157,8 @@ Mailhog capture tous les mails envoyés en dev, accessibles via l’interface we
 ./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini → configuration Xdebug
 
 ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf → configuration Nginx
+
+---
 
 ## 🔧 Notes
 Nginx pointe vers /var/www/html/public
@@ -160,11 +169,13 @@ Symfony CLI et Composer installés dans le conteneur PHP
 
 Xdebug configuré pour host.docker.internal (Linux : remplacer par l’IP de l’hôte)
 
+---
+
 ## 🐞 Configuration et utilisation de Xdebug
 
 Le projet inclut une configuration complète de Xdebug pour faciliter le débogage du code PHP, que ce soit depuis un IDE (PhpStorm, VSCode…) ou en ligne de commande.
 
-⚙️ Configuration de base
+### ⚙️ Configuration de base
 
 Le fichier de configuration Xdebug se trouve ici :
 
@@ -187,7 +198,7 @@ xdebug.var_display_max_children=256
 xdebug.var_display_max_data=1024
 ```
 
-🚀 Activer Xdebug temporairement
+### 🚀 Activer Xdebug temporairement
 
 Pour activer Xdebug uniquement le temps d’une commande, il suffit de définir la variable d’environnement XDEBUG_MODE=debug.
 
@@ -201,7 +212,7 @@ docker compose exec php bash
 XDEBUG_MODE=debug php bin/console make:entity
 ```
 
-💡 Activer Xdebug pour le débogage IDE
+### 💡 Activer Xdebug pour le débogage IDE
 
 Si tu veux déboguer le projet depuis PhpStorm ou VSCode :
 
@@ -218,3 +229,78 @@ Configure le mapping :
 Dossier du projet local → /var/www/html (dans le conteneur).
 
 Lance une requête HTTP ou une commande CLI : le breakpoint s’activera automatiquement 🎯
+
+---
+
+## 🧹 Gestion de la qualité de code avec PHP-CS-Fixer
+
+Ce projet utilise PHP-CS-Fixer pour uniformiser le style du code, appliquer les conventions de développement Symfony/PSR-12 et garantir une base propre et cohérente.
+
+PHP-CS-Fixer corrige automatiquement les fichiers PHP selon un ensemble de règles strictes : imports triés, typage renforcé, docblocks propres, simplification des structures de contrôle, etc.
+
+### 🚀 Installation
+
+PHP-CS-Fixer est installé comme dépendance de développement :
+
+```bash
+composer require --dev friendsofphp/php-cs-fixer
+```
+
+La configuration se trouve dans le fichier :
+
+```text
+.php-cs-fixer.dist.php
+```
+
+## ⚙️ Configuration utilisée
+
+Le projet utilise une configuration stricte incluant :
+
+- @Symfony et @Symphony:risky
+- @PSR12
+- Tri alphabétique des imports
+- Suppression des imports inutilisés
+- Ajout de declare(strict_types=1)
+- Simplification des retours (simplified_if_return)
+- Style d’array court
+- Nettoyage automatique des docblocks
+- Modernisation des casts
+- Appels aux fonctions natives optimisés
+
+Cette configuration garantit une base de code homogène et proche des standards modernes de Symfony.
+
+### 🧪 Commandes disponibles
+
+Deux scripts Composer sont fournis pour faciliter l’usage de PHP-CS-Fixer :
+
+#### 🔍 Vérifier le style de code
+
+Exécute un “dry-run” pour afficher les erreurs sans les corriger :
+
+```bash
+composer cs
+```
+
+#### 🔧 Corriger automatiquement le code
+
+Applique toutes les règles définies dans .php-cs-fixer.dist.php :
+```bash
+composer cs:fix
+```
+
+#### 🏗️ Intégration Docker
+
+PHP-CS-Fixer étant installé dans vendor/, il peut être exécuté directement depuis le conteneur PHP :
+
+```bash
+docker exec -it app-symfony-php bash
+composer cs:fix
+```
+
+#### 💡 Conseils
+
+Lance composer cs avant chaque commit pour détecter les erreurs de style.
+
+Ajoute php-cs-fixer dans un hook Git (pre-commit) si tu veux automatiser le processus.
+
+Utilise composer cs:fix régulièrement pour garder un code propre et lisible.
